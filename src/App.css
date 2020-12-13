@@ -1,0 +1,28 @@
+html {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: content-box;
+}
+main {
+  min-height: 80vh;
+}
+body {
+  background-color: #ffffff;
+}
+@media (max-width: 900px) {
+  .homeContent {
+    display: block;
+  }
+  .homeContainer {
+    width: 58vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .homeContent h1 {
+    text-align: center;
+    padding: 10px 5px !important;
+    margin: 0px 5px !important;
+    font-size: 15px;
+  }
+}
