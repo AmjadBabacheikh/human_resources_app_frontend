@@ -3,3 +3,18 @@
   color: #fafafa;
   padding: 25px;
 }
+li {
+  list-style: none;
+}
+ul {
+  margin: 5px;
+  padding: 5px;
+}
+a {
+  color: #e8f1f5;
+  text-decoration: none;
+}
+a:hover {
+  color: #e8f1f5;
+  text-decoration: none;
+}
