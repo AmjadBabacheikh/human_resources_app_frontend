@@ -15,7 +15,7 @@
   ],
   "author": "Babacheikh Amjad",
   "license": "ISC",
-  "proxy": "http://127.0.0.1:8080",
+  "proxy": "https://donasid-recrute.herokuapp.com",
   "dependencies": {
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
