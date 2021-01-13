@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Col, Row, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Loader from '../components/Loader';
+import { register } from '../actions/userActions';
+import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
 import './SignUpScreen.css';
 
 const SignUpScreen = () => {
+  const dispatch = useDispatch();
   const [CIN, setCin] = useState('');
   const [fisrtName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -13,10 +18,28 @@ const SignUpScreen = () => {
   const [confirmedPassword, setConfirmedPassword] = useState('');
   const [adress, setAdress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [message, setMessage] = useState(null);
+
+  const userRegister = useSelector((state) => state.userRegister);
+  const { Loading, error, userInfo } = userRegister;
+
+  const handleInscription = (e) => {
+    e.preventDefault();
+    if (confirmedPassword !== password) {
+      setMessage('passwords sont non identiques');
+    } else {
+      dispatch(
+        register(CIN, email, password, firstName, lastName, adress, phoneNumber)
+      );
+    }
+  };
   return (
     <FormContainer className='align-middle'>
       <h1 className='py-2 text-center'>Inscription</h1>
-      <Form>
+      {Loading && <Loader />}
+      {error && <Message variant='danger'>{error}</Message>}
+      {message && <Message variant='danger'>{message}</Message>}
+      <Form onSubmit={handleInscription}>
         <Row>
           <Col>
             <Form.Group controlId='firstName'>
@@ -101,7 +124,7 @@ const SignUpScreen = () => {
           />
         </Form.Group>
         <Form.Group controlId='adress'>
-          <Form.Label>Your phone number</Form.Label>
+          <Form.Label>Your Address</Form.Label>
           <Form.Control
             type='text'
             placeholder='542 W. 15th Street'

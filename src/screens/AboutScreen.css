@@ -1,0 +1,10 @@
+.about-section {
+  padding: 50px;
+  text-align: center;
+  text-shadow: 20px;
+  background-image: url(../about.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: snow;
+}

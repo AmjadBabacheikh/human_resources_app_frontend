@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Navbar, Button, Nav, Container } from 'react-bootstrap';
+import { Navbar, Button, Nav, Container, NavDropdown } from 'react-bootstrap';
+import { Redirect, Route } from 'react-router-dom';
+import { logout } from '../actions/userActions';
 import { LinkContainer } from 'react-router-bootstrap';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ history }) => {
+  const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { Loading, error, userInfo } = userLogin;
   return (
@@ -27,12 +30,27 @@ const Header = () => {
                 <Nav.Link className='nav-link'>À propos</Nav.Link>
               </LinkContainer>
               {userInfo ? (
-                <LinkContainer to='/'>
-                  <Nav.Link className='nav-link'>
-                    {userInfo.user.firstName}
-                    {userInfo.user.lastName}
-                  </Nav.Link>
-                </LinkContainer>
+                <NavDropdown
+                  title={`${userInfo.user.firstName} ${userInfo.user.lastName}`}
+                  id='username'
+                >
+                  <LinkContainer to='/profile'>
+                    <NavDropdown.Item>profile</NavDropdown.Item>
+                  </LinkContainer>
+                  <Route
+                    render={({ history }) => (
+                      <NavDropdown.Item
+                        history={history}
+                        onClick={() => {
+                          dispatch(logout());
+                          history.push('/');
+                        }}
+                      >
+                        logout
+                      </NavDropdown.Item>
+                    )}
+                  />
+                </NavDropdown>
               ) : (
                 <LinkContainer to='/signin'>
                   <Nav.Link className='nav-link'>connexion</Nav.Link>

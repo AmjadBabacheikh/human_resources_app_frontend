@@ -7,6 +7,7 @@ import OffresScreen from './screens/OffresScreen';
 import Footer from './components/Footer';
 import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
+import AboutScreen from './screens/AboutScreen';
 import './App.css';
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
           <Route path='/offres' component={OffresScreen} exact />
           <Route path='/signin' component={SignInScreen} exact />
           <Route path='/register' component={SignUpScreen} exact />
+          <Route path='/about' component={AboutScreen} exact />
         </Container>
       </main>
       <Footer />
