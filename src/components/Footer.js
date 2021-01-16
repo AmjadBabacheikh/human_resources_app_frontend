@@ -50,6 +50,15 @@ const Footer = () => {
                 <Link to='/about'>A propos</Link>
               </li>
             </ul>
+            <h4>Suivez-nous</h4>
+            <ul>
+              <li>
+                <i className='fab fa-facebook fa-lg  py-3'></i>
+                <i className='fab fa-linkedin fa-lg mx-3 py-3'></i>
+                <i className='fab fa-instagram fa-lg py-3'></i>
+                <i className='fab fa-twitter fa-lg mx-3 py-3'></i>
+              </li>
+            </ul>
           </Col>
         </Row>
         <Row>

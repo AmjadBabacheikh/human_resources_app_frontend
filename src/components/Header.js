@@ -33,7 +33,7 @@ const Header = ({ history }) => {
                 <Nav.Link className='nav-link'>À propos</Nav.Link>
               </LinkContainer>
               {userInfo && userInfo.user.role === 'ADMIN' ? (
-                <NavDropdown title='ADMIN' id='ADMIN'>
+                <NavDropdown title='Admin' id='Admin'>
                   <LinkContainer to='/admin/userslist'>
                     <NavDropdown.Item>users</NavDropdown.Item>
                   </LinkContainer>
@@ -44,7 +44,7 @@ const Header = ({ history }) => {
               ) : null}
               {userInfo ? (
                 <NavDropdown
-                  title={`${userInfo.user.firstName} ${userInfo.user.lastName}`}
+                  title={`${userInfo.user.firstName.toUpperCase()} ${userInfo.user.lastName.toUpperCase()}`}
                   id='username'
                 >
                   <LinkContainer to='/profile'>
