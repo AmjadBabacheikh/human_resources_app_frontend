@@ -9,6 +9,7 @@ import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import AboutScreen from './screens/AboutScreen';
 import './App.css';
+import UsersListScreen from './screens/UsersListScreen';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path='/signin' component={SignInScreen} exact />
           <Route path='/register' component={SignUpScreen} exact />
           <Route path='/about' component={AboutScreen} exact />
+          <Route path='/admin/userslist' component={UsersListScreen} exact />
         </Container>
       </main>
       <Footer />

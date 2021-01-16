@@ -12,7 +12,7 @@ export const listOffresReducer = (state = { offres: [] }, action) => {
     case OFFRES_LIST_SUCCESS:
       return { Loading: false, offres: payload };
     case OFFRES_LIST_FAIL:
-      return { Loading: false };
+      return { Loading: false, error: payload };
     default:
       return state;
   }

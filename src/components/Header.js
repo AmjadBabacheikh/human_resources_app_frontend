@@ -10,6 +10,9 @@ const Header = ({ history }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { Loading, error, userInfo } = userLogin;
+  // const { user } = userInfo;
+  // const { authorities } = user;
+  // console.log(userInfo.user.authorities[0].authority);
   return (
     <header>
       <Navbar className='nav-color' expand='lg'>
@@ -29,6 +32,16 @@ const Header = ({ history }) => {
               <LinkContainer to='/About'>
                 <Nav.Link className='nav-link'>À propos</Nav.Link>
               </LinkContainer>
+              {userInfo && userInfo.user.role === 'ADMIN' ? (
+                <NavDropdown title='ADMIN' id='ADMIN'>
+                  <LinkContainer to='/admin/userslist'>
+                    <NavDropdown.Item>users</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to='/admin/offreslist'>
+                    <NavDropdown.Item>offres</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              ) : null}
               {userInfo ? (
                 <NavDropdown
                   title={`${userInfo.user.firstName} ${userInfo.user.lastName}`}

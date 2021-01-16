@@ -15,10 +15,15 @@ const SignInScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { Loading, error, userInfo } = userLogin;
 
+  useEffect(() => {
+    if (userInfo) {
+      history.push('/');
+    }
+  }, [userInfo, history]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
-    history.push('/');
   };
   return (
     <div

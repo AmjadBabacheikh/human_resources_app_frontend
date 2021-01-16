@@ -1,10 +1,21 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Container, Col, Row, Image, Button } from 'react-bootstrap';
 import { Spring } from 'react-spring/renderprops';
 import homeImage from '../homeImage.jpg';
 import './HomeScreen.css';
 
-const HomeScreen = () => {
+const HomeScreen = ({ history }) => {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const handlePostuler = () => {
+    if (userInfo) {
+      history.push('/offres');
+    } else {
+      history.push('/signin');
+    }
+  };
   return (
     <Container className='homeContent' style={{ minHeight: '40vh' }}>
       <Row>
@@ -21,16 +32,16 @@ const HomeScreen = () => {
           </h1>
         </Col>
         <Col md={7} lg={5} xs={12}>
-          {/* <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
-            {(props) => ( */}
-          <Image
-            // style={props}
-            className='homeContainer'
-            src={homeImage}
-            alt='home image'
-          />
-          {/* )}
-          </Spring> */}
+          <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
+            {(props) => (
+              <Image
+                style={props}
+                className='homeContainer'
+                src={homeImage}
+                alt='home image'
+              />
+            )}
+          </Spring>
         </Col>
       </Row>
       <Row>
@@ -48,7 +59,9 @@ const HomeScreen = () => {
       <Row>
         <Col>
           <div className='text-center py-3'>
-            <Button className='p-3 btn-apply'>Postuler maintenant</Button>
+            <Button className='p-3 btn-apply' onClick={handlePostuler}>
+              Postuler maintenant
+            </Button>
           </div>
         </Col>
       </Row>

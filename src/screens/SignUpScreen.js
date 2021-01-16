@@ -11,7 +11,7 @@ import './SignUpScreen.css';
 const SignUpScreen = () => {
   const dispatch = useDispatch();
   const [CIN, setCin] = useState('');
-  const [fisrtName, setFirstName] = useState('');
+  const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,9 +45,9 @@ const SignUpScreen = () => {
             <Form.Group controlId='firstName'>
               <Form.Label>Your first name</Form.Label>
               <Form.Control
-                type='firstName'
+                type='text'
                 placeholder='John'
-                value={fisrtName}
+                value={firstName}
                 onChange={(e) => {
                   setFirstName(e.target.value);
                 }}
@@ -58,7 +58,7 @@ const SignUpScreen = () => {
             <Form.Group controlId='lastName'>
               <Form.Label>Your last name</Form.Label>
               <Form.Control
-                type='lastName'
+                type='text'
                 placeholder='Doe'
                 value={lastName}
                 onChange={(e) => {

@@ -6,6 +6,13 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
+  USER_LIST_REQUEST,
+  USER_LIST_SUCCESS,
+  USER_LIST_FAIL,
+  USER_LIST_RESET,
 } from '../contants/userConstants';
 
 export const loginReducer = (state = {}, action) => {
@@ -51,6 +58,22 @@ export const registerReducer = (state = {}, action) => {
         error: payload,
       };
     }
+    default:
+      return state;
+  }
+};
+
+export const usersListReducer = (state = { users: [] }, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case USER_LIST_REQUEST:
+      return { Loading: true };
+    case USER_LIST_SUCCESS:
+      return { Loading: false, users: payload };
+    case USER_LIST_FAIL:
+      return { Loading: false, error: payload };
+    case USER_LIST_RESET:
+      return { users: [] };
     default:
       return state;
   }
