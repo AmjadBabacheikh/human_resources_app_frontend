@@ -28,7 +28,7 @@ const UsersListScreen = () => {
   };
   return (
     <>
-      <h2 className='my-2'>Users</h2>
+      <h2 className='my-2 py-2'>Users List</h2>
       {Loading ? (
         <Loader />
       ) : error ? (
@@ -63,11 +63,12 @@ const UsersListScreen = () => {
                       <i className='fas fa-edit'></i>
                     </Button>
                   </LinkContainer>
+
                   <Button
                     variant='danger'
                     className='btn-sm'
                     onClick={() => deleteUserHandler(user.id)}
-                    style={{ marginLeft: '5px' }}
+                    style={{ marginLeft: '30px' }}
                   >
                     <i className='fas fa-trash'></i>
                   </Button>
