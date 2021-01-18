@@ -1,7 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { listOffresReducer } from './reducers/offresReducers';
+import {
+  listOffresReducer,
+  offreDeleteReducer,
+} from './reducers/offresReducers';
 import {
   loginReducer,
   registerReducer,
@@ -16,6 +19,7 @@ const reducer = combineReducers({
   userLogin: loginReducer,
   userRegister: registerReducer,
   usersList: usersListReducer,
+  offreDelete: offreDeleteReducer,
 });
 const initialState = {
   userLogin: {
