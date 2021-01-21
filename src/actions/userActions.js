@@ -13,6 +13,12 @@ import {
   USER_LIST_REQUEST,
   USER_LIST_SUCCESS,
   USER_LIST_FAIL,
+  USER_INFO_REQUEST,
+  USER_INFO_SUCCESS,
+  USER_INFO_FAIL,
+  USER_CHANGE_ROLE_REQUEST,
+  USER_CHANGE_ROLE_SUCCESS,
+  USER_CHANGE_ROLE_FAIL,
 } from '../contants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -115,34 +121,88 @@ export const getUsers = () => async (dispatch, getState) => {
   }
 };
 
-// export const deleteUser = (id) => async (dispatch, getState) => {
-//   try {
-//     dispatch({
-//       type: USER_DELETE_REQUEST,
-//     });
-//     const {
-//       userLogin: { userInfo },
-//     } = getState();
-//     const config = {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `${userInfo.jwt}`,
-//       },
-//     };
-//     await axios.delete(`/api/users/${id}`, config);
-//     dispatch({ type: USER_DELETE_SUCCESS });
-//   } catch (error) {
-//     dispatch({
-//       type: USER_DELETE_FAIL,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     });
-//   }
-// };
+export const deleteUser = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_DELETE_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${userInfo.jwt}`,
+      },
+    };
+    await axios.delete(`/api/ADMIN/users/${id}`, config);
+    dispatch({ type: USER_DELETE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: USER_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getUser = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_INFO_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${userInfo.jwt}`,
+      },
+    };
+    const { data } = await axios.get(`/api/ADMIN/users/${id}`, config);
+    dispatch({ type: USER_INFO_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_INFO_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 export const logout = () => async (dispatch) => {
   localStorage.removeItem('userInfo');
   dispatch({ type: USER_LOGOUT });
+};
+
+export const changeRoleUser = (id, role) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_CHANGE_ROLE_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${userInfo.jwt}`,
+      },
+    };
+    await axios.put(`/api/ADMIN/users/${id}/role`, { role }, config);
+    dispatch({ type: USER_CHANGE_ROLE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: USER_CHANGE_ROLE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };

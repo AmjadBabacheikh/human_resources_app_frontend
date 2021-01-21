@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Row, Col, Container, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { getOffres, deleteOffer } from '../actions/offresActions';
+import {
+  getOffresAdmin,
+  deleteOffer,
+  validerOffer,
+} from '../actions/offresActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
@@ -10,20 +14,31 @@ const OffresAdminScreen = ({ history }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const listOffres = useSelector((state) => state.listOffres);
-  const { Loading, offres, error } = listOffres;
+  const listOffresAdmin = useSelector((state) => state.listOffresAdmin);
+  const { Loading, offres, error } = listOffresAdmin;
   const offreDelete = useSelector((state) => state.offreDelete);
   const { Loading: LoadingDelete, successDelete, errorDelete } = offreDelete;
+  const offreValidate = useSelector((state) => state.offreValidate);
+  const {
+    Loading: LoadingValidate,
+    successValidate,
+    errorValidate,
+  } = offreValidate;
   useEffect(() => {
     if (userInfo && userInfo.user.role === 'ADMIN') {
-      dispatch(getOffres());
+      dispatch(getOffresAdmin());
     } else {
       history.push('/signin');
     }
-  }, [dispatch, history, successDelete, userInfo]);
+  }, [dispatch, history, successDelete, userInfo, successValidate]);
   const deleteOfferHandler = (id) => {
     if (window.confirm('are you sure')) {
       dispatch(deleteOffer(id));
+    }
+  };
+  const validerOffreHandler = (id) => {
+    if (window.confirm('are you sure')) {
+      dispatch(validerOffer(id));
     }
   };
   return (
@@ -59,7 +74,11 @@ const OffresAdminScreen = ({ history }) => {
                 </td>
                 <td>
                   <LinkContainer to={`/admin/user/${offre.id}/edit`}>
-                    <Button variant='light' className='btn-sm'>
+                    <Button
+                      variant='light'
+                      className='btn-sm'
+                      style={{ marginLeft: '5px' }}
+                    >
                       <i className='fas fa-edit'></i>
                     </Button>
                   </LinkContainer>
@@ -68,9 +87,17 @@ const OffresAdminScreen = ({ history }) => {
                     variant='danger'
                     className='btn-sm'
                     onClick={() => deleteOfferHandler(offre.id)}
-                    style={{ marginLeft: '5px' }}
+                    style={{ marginTop: '5px' }}
                   >
                     <i className='fas fa-trash'></i>
+                  </Button>
+                  <Button
+                    variant='primary'
+                    className='btn-sm'
+                    onClick={() => validerOffreHandler(offre.id)}
+                    style={{ marginTop: '5px' }}
+                  >
+                    <i className='fa fa-check'></i>
                   </Button>
                 </td>
               </tr>

@@ -11,6 +11,7 @@ import AboutScreen from './screens/AboutScreen';
 import './App.css';
 import UsersListScreen from './screens/UsersListScreen';
 import OffresAdminScreen from './screens/OffresAdminScreen';
+import UserUpdateAdmin from './screens/UserUpdateAdmin';
 
 const App = () => {
   return (
@@ -25,6 +26,11 @@ const App = () => {
           <Route path='/about' component={AboutScreen} exact />
           <Route path='/admin/userslist' component={UsersListScreen} exact />
           <Route path='/admin/offreslist' component={OffresAdminScreen} exact />
+          <Route
+            path='/admin/user/:id/edit'
+            component={UserUpdateAdmin}
+            exact
+          />
         </Container>
       </main>
       <Footer />
