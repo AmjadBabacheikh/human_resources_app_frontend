@@ -19,6 +19,9 @@ import {
   USER_CHANGE_ROLE_REQUEST,
   USER_CHANGE_ROLE_SUCCESS,
   USER_CHANGE_ROLE_FAIL,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_SUCCESS,
+  USER_UPDATE_PROFILE_FAIL,
 } from '../contants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -199,6 +202,33 @@ export const changeRoleUser = (id, role) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_CHANGE_ROLE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateProfile = (user) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_UPDATE_PROFILE_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${userInfo.jwt}`,
+      },
+    };
+    const { data } = await axios.put(`api/CANDIDAT`, user, config);
+    dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATE_PROFILE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

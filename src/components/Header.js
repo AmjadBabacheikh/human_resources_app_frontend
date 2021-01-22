@@ -32,6 +32,16 @@ const Header = ({ history }) => {
               <LinkContainer to='/About'>
                 <Nav.Link className='nav-link'>À propos</Nav.Link>
               </LinkContainer>
+              {userInfo && userInfo.user.role === 'RECRUTEUR' ? (
+                <NavDropdown title='Recruteur' id='Rectruteur'>
+                  <LinkContainer to='/recruteur/candidatures'>
+                    <NavDropdown.Item>candidatures</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to='/recruteur/offres'>
+                    <NavDropdown.Item>offres</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              ) : null}
               {userInfo && userInfo.user.role === 'ADMIN' ? (
                 <NavDropdown title='Admin' id='Admin'>
                   <LinkContainer to='/admin/userslist'>

@@ -21,6 +21,10 @@ import {
   USER_CHANGE_ROLE_SUCCESS,
   USER_CHANGE_ROLE_FAIL,
   USER_CHANGE_ROLE_RESET,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_SUCCESS,
+  USER_UPDATE_PROFILE_FAIL,
+  USER_UPDATE_PROFILE_RESET,
 } from '../contants/userConstants';
 
 export const loginReducer = (state = {}, action) => {
@@ -127,6 +131,22 @@ export const userChangeRoleReducer = (state = {}, action) => {
     case USER_CHANGE_ROLE_FAIL:
       return { Loading: false, errorChange: payload };
     case USER_CHANGE_ROLE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const profileUpdateReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case USER_UPDATE_PROFILE_REQUEST:
+      return { Loading: true };
+    case USER_UPDATE_PROFILE_SUCCESS:
+      return { Loading: false, success: true };
+    case USER_UPDATE_PROFILE_FAIL:
+      return { Loading: false, error: payload };
+    case USER_UPDATE_PROFILE_RESET:
       return {};
     default:
       return state;

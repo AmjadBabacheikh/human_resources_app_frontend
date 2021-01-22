@@ -6,6 +6,7 @@ import {
   offreDeleteReducer,
   listOffresAdminReducer,
   offreValidateReducer,
+  listOffresRecruteurReducer,
 } from './reducers/offresReducers';
 import {
   loginReducer,
@@ -14,6 +15,7 @@ import {
   userDeleteReducer,
   userChangeRoleReducer,
   userInfosReducer,
+  profileUpdateReducer,
 } from './reducers/userReducers';
 
 const userLoginFromStorage = localStorage.getItem('userInfo')
@@ -30,6 +32,8 @@ const reducer = combineReducers({
   offreValidate: offreValidateReducer,
   userChangeRole: userChangeRoleReducer,
   userInfos: userInfosReducer,
+  profileUpdate: profileUpdateReducer,
+  listOffresRecruteur: listOffresRecruteurReducer,
 });
 const initialState = {
   userLogin: {

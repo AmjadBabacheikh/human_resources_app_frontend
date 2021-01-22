@@ -2,48 +2,27 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Row, Col, Container, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import {
-  getOffresAdmin,
-  deleteOffer,
-  validerOffer,
-} from '../actions/offresActions';
+import { getOffresRecruteur } from '../actions/offresActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-const OffresAdminScreen = ({ history }) => {
+const OffresRecruteurScreen = ({ history }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const listOffresAdmin = useSelector((state) => state.listOffresAdmin);
-  const { Loading, offres, error } = listOffresAdmin;
-  const offreDelete = useSelector((state) => state.offreDelete);
-  const { Loading: LoadingDelete, successDelete, errorDelete } = offreDelete;
-  const offreValidate = useSelector((state) => state.offreValidate);
-  const {
-    Loading: LoadingValidate,
-    successValidate,
-    errorValidate,
-  } = offreValidate;
+  const listOffresRecruteur = useSelector((state) => state.listOffresRecruteur);
+  const { Loading, offres, error } = listOffresRecruteur;
   useEffect(() => {
-    if (userInfo && userInfo.user.role === 'ADMIN') {
-      dispatch(getOffresAdmin());
+    if (userInfo && userInfo.user.role === 'RECRUTEUR') {
+      dispatch(getOffresRecruteur());
     } else {
       history.push('/signin');
     }
-  }, [dispatch, history, successDelete, userInfo, successValidate]);
-  const deleteOfferHandler = (id) => {
-    if (window.confirm('are you sure')) {
-      dispatch(deleteOffer(id));
-    }
-  };
-  const validerOffreHandler = (id) => {
-    if (window.confirm('are you sure')) {
-      dispatch(validerOffer(id));
-    }
-  };
+  }, [dispatch, history, userInfo]);
+
   return (
     <>
-      <h2 className='my-2 py-2'>Offers List</h2>
+      <h2 className='my-2 py-2'>Your Offers List</h2>
       {Loading ? (
         <Loader />
       ) : error ? (
@@ -73,7 +52,7 @@ const OffresAdminScreen = ({ history }) => {
                   )}
                 </td>
                 <td>
-                  {/* <LinkContainer to={`/admin/user/${offre.id}/edit`}>
+                  {/* <LinkContainer to={`/admin/recruteur/${offre.id}/edit`}>
                     <Button
                       variant='light'
                       className='btn-sm'
@@ -82,22 +61,15 @@ const OffresAdminScreen = ({ history }) => {
                       <i className='fas fa-edit'></i>
                     </Button>
                   </LinkContainer> */}
-
-                  <Button
-                    variant='danger'
-                    className='btn-sm'
-                    onClick={() => deleteOfferHandler(offre.id)}
-                    style={{ marginTop: '5px' }}
-                  >
-                    <i className='fas fa-trash'></i>
-                  </Button>
                   <Button
                     variant='primary'
                     className='btn-sm'
-                    onClick={() => validerOffreHandler(offre.id)}
+                    onClick={() => {
+                      console.log('hello');
+                    }}
                     style={{ marginTop: '5px' }}
                   >
-                    <i className='fa fa-check'></i>
+                    <i class='far fa-times-circle'></i>
                   </Button>
                 </td>
               </tr>
@@ -109,4 +81,4 @@ const OffresAdminScreen = ({ history }) => {
   );
 };
 
-export default OffresAdminScreen;
+export default OffresRecruteurScreen;
