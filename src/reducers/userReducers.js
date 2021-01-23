@@ -25,6 +25,7 @@ import {
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_RESET,
+  USER_REGISTER_RESET,
 } from '../contants/userConstants';
 
 export const loginReducer = (state = {}, action) => {
@@ -69,6 +70,9 @@ export const registerReducer = (state = {}, action) => {
         Loading: false,
         error: payload,
       };
+    }
+    case USER_REGISTER_RESET: {
+      return {};
     }
     default:
       return state;

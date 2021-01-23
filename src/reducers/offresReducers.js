@@ -14,6 +14,10 @@ import {
   OFFRES_LIST_RECRUTEUR_REQUEST,
   OFFRES_LIST_RECRUTEUR_SUCCESS,
   OFFRES_LIST_RECRUTEUR_FAIL,
+  OFFRE_CREATE_REQUEST,
+  OFFRE_CREATE_SUCCESS,
+  OFFRE_CREATE_FAIL,
+  OFFRE_CREATE_RESET,
 } from '../contants/offresContants';
 
 export const listOffresReducer = (state = { offres: [] }, action) => {
@@ -81,6 +85,22 @@ export const listOffresRecruteurReducer = (state = { offres: [] }, action) => {
       return { Loading: false, offres: payload };
     case OFFRES_LIST_RECRUTEUR_FAIL:
       return { Loading: false, error: payload };
+    default:
+      return state;
+  }
+};
+
+export const offreCreateReducer = (state = { offre: {} }, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case OFFRE_CREATE_REQUEST:
+      return { Loading: true };
+    case OFFRE_CREATE_SUCCESS:
+      return { Loading: false, offre: payload, success: true };
+    case OFFRE_CREATE_FAIL:
+      return { Loading: false, error: payload };
+    case OFFRE_CREATE_RESET:
+      return {};
     default:
       return state;
   }

@@ -22,11 +22,28 @@ const OffresRecruteurScreen = ({ history }) => {
 
   return (
     <>
-      <h2 className='my-2 py-2'>Your Offers List</h2>
+      <Row>
+        <Col>
+          <h3 className='my-1 py-2'>Your Offers</h3>
+        </Col>
+        <Col>
+          <Button
+            className='my-3 btn-sm py-1'
+            onClick={() => {
+              history.push('/recruteur/offer/create');
+            }}
+            style={{ float: 'right' }}
+          >
+            Nouvelle Offre
+          </Button>
+        </Col>
+      </Row>
       {Loading ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
+      ) : offres.length === 0 ? (
+        <h3>Oups,Vous n avez aucune offre</h3>
       ) : (
         <Table striped bordered hover className='sm' responsive>
           <thead>
@@ -62,14 +79,14 @@ const OffresRecruteurScreen = ({ history }) => {
                     </Button>
                   </LinkContainer> */}
                   <Button
-                    variant='primary'
+                    variant='danger'
                     className='btn-sm'
                     onClick={() => {
                       console.log('hello');
                     }}
                     style={{ marginTop: '5px' }}
                   >
-                    <i class='far fa-times-circle'></i>
+                    <i className='far fa-times-circle'></i>
                   </Button>
                 </td>
               </tr>

@@ -15,6 +15,9 @@ import {
   OFFRES_LIST_RECRUTEUR_REQUEST,
   OFFRES_LIST_RECRUTEUR_SUCCESS,
   OFFRES_LIST_RECRUTEUR_FAIL,
+  OFFRE_CREATE_REQUEST,
+  OFFRE_CREATE_SUCCESS,
+  OFFRE_CREATE_FAIL,
 } from '../contants/offresContants';
 
 export const getOffres = () => async (dispatch) => {
@@ -129,6 +132,31 @@ export const getOffresRecruteur = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: OFFRES_LIST_RECRUTEUR_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const createOffre = (offre) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: OFFRE_CREATE_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${userInfo.jwt}`,
+      },
+    };
+    const { data } = await axios.post('/api/RECRUTEUR/offers', offre, config);
+    dispatch({ type: OFFRE_CREATE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: OFFRE_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

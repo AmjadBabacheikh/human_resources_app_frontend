@@ -7,6 +7,7 @@ import {
   listOffresAdminReducer,
   offreValidateReducer,
   listOffresRecruteurReducer,
+  offreCreateReducer,
 } from './reducers/offresReducers';
 import {
   loginReducer,
@@ -34,6 +35,7 @@ const reducer = combineReducers({
   userInfos: userInfosReducer,
   profileUpdate: profileUpdateReducer,
   listOffresRecruteur: listOffresRecruteurReducer,
+  offreCreate: offreCreateReducer,
 });
 const initialState = {
   userLogin: {

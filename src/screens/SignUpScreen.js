@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Col, Row, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
 import './SignUpScreen.css';
 
-const SignUpScreen = () => {
+const SignUpScreen = ({ history }) => {
   const dispatch = useDispatch();
   const [CIN, setCin] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -22,6 +22,12 @@ const SignUpScreen = () => {
 
   const userRegister = useSelector((state) => state.userRegister);
   const { Loading, error, userInfo } = userRegister;
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push('/');
+    }
+  }, [history, userInfo]);
 
   const handleInscription = (e) => {
     e.preventDefault();

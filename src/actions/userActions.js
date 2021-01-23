@@ -22,6 +22,7 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
+  USER_REGISTER_RESET,
 } from '../contants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -181,6 +182,7 @@ export const getUser = (id) => async (dispatch, getState) => {
 export const logout = () => async (dispatch) => {
   localStorage.removeItem('userInfo');
   dispatch({ type: USER_LOGOUT });
+  dispatch({ type: USER_REGISTER_RESET });
 };
 
 export const changeRoleUser = (id, role) => async (dispatch, getState) => {
