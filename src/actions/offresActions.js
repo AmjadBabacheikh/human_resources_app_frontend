@@ -18,6 +18,9 @@ import {
   OFFRE_CREATE_REQUEST,
   OFFRE_CREATE_SUCCESS,
   OFFRE_CREATE_FAIL,
+  OFFRE_DETAIL_REQUEST,
+  OFFRE_DETAIL_SUCCESS,
+  OFFRE_DETAIL_FAIL,
 } from '../contants/offresContants';
 
 export const getOffres = () => async (dispatch) => {
@@ -98,7 +101,7 @@ export const validerOffer = (id) => async (dispatch, getState) => {
     } = getState();
     const config = {
       headers: {
-        // 'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `${userInfo.jwt}`,
       },
     };
@@ -157,6 +160,21 @@ export const createOffre = (offre) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: OFFRE_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+export const getOffreDetail = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: OFFRE_DETAIL_REQUEST });
+    const { data } = await axios.get(`/api/offers/${id}`);
+    dispatch({ type: OFFRE_DETAIL_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: OFFRE_DETAIL_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

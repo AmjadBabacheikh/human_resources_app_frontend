@@ -60,6 +60,11 @@ const Header = ({ history }) => {
                   <LinkContainer to='/profile'>
                     <NavDropdown.Item>profile</NavDropdown.Item>
                   </LinkContainer>
+                  {userInfo && userInfo.user.role === 'CANDIDAT' ? (
+                    <LinkContainer to='/candidatures'>
+                      <NavDropdown.Item>candidatures</NavDropdown.Item>
+                    </LinkContainer>
+                  ) : null}
                   <Route
                     render={({ history }) => (
                       <NavDropdown.Item

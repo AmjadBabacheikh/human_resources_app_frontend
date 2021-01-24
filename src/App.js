@@ -15,7 +15,7 @@ import UserUpdateAdmin from './screens/UserUpdateAdmin';
 import ProfileUserScreen from './screens/ProfileUserScreen';
 import OffresRecruteurScreen from './screens/OffresRecruteurScreen';
 import OffreCreateScreen from './screens/OffreCreateScreen';
-
+import OffreDetailScreen from './screens/OffreDetailScreen';
 const App = () => {
   return (
     <Router>
@@ -24,6 +24,7 @@ const App = () => {
         <Container>
           <Route path='/' component={HomeScreen} exact />
           <Route path='/offres' component={OffresScreen} exact />
+          <Route path='/offers/:id' component={OffreDetailScreen} exact />
           <Route path='/signin' component={SignInScreen} exact />
           <Route path='/register' component={SignUpScreen} exact />
           <Route path='/about' component={AboutScreen} exact />

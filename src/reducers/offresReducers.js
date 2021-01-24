@@ -18,6 +18,9 @@ import {
   OFFRE_CREATE_SUCCESS,
   OFFRE_CREATE_FAIL,
   OFFRE_CREATE_RESET,
+  OFFRE_DETAIL_REQUEST,
+  OFFRE_DETAIL_SUCCESS,
+  OFFRE_DETAIL_FAIL,
 } from '../contants/offresContants';
 
 export const listOffresReducer = (state = { offres: [] }, action) => {
@@ -101,6 +104,20 @@ export const offreCreateReducer = (state = { offre: {} }, action) => {
       return { Loading: false, error: payload };
     case OFFRE_CREATE_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const detailOffreReducer = (state = { offre: {} }, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case OFFRE_DETAIL_REQUEST:
+      return { Loading: true };
+    case OFFRE_DETAIL_SUCCESS:
+      return { Loading: false, offre: payload };
+    case OFFRE_DETAIL_FAIL:
+      return { Loading: false, error: payload };
     default:
       return state;
   }
