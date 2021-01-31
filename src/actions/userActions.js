@@ -226,7 +226,7 @@ export const updateProfile = (user) => async (dispatch, getState) => {
         Authorization: `${userInfo.jwt}`,
       },
     };
-    const { data } = await axios.put(`api/CANDIDAT`, user, config);
+    const { data } = await axios.put(`api/CANDIDAT`, { user }, config);
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

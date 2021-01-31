@@ -19,6 +19,11 @@ import {
   userInfosReducer,
   profileUpdateReducer,
 } from './reducers/userReducers';
+import {
+  offrePostulerReducer,
+  candidatCandidaturesReducer,
+  candidatureCancelReducer,
+} from './reducers/candidaturesReducers';
 
 const userLoginFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
@@ -38,6 +43,9 @@ const reducer = combineReducers({
   listOffresRecruteur: listOffresRecruteurReducer,
   offreCreate: offreCreateReducer,
   detailOffre: detailOffreReducer,
+  offrePostuler: offrePostulerReducer,
+  candidatCandidatures: candidatCandidaturesReducer,
+  candidatureCancel: candidatureCancelReducer,
 });
 const initialState = {
   userLogin: {

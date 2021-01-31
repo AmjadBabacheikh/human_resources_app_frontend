@@ -16,6 +16,7 @@ import ProfileUserScreen from './screens/ProfileUserScreen';
 import OffresRecruteurScreen from './screens/OffresRecruteurScreen';
 import OffreCreateScreen from './screens/OffreCreateScreen';
 import OffreDetailScreen from './screens/OffreDetailScreen';
+import CandidaturesUserScreen from './screens/CandidaturesUserScreen';
 const App = () => {
   return (
     <Router>
@@ -31,6 +32,11 @@ const App = () => {
           <Route path='/profile' component={ProfileUserScreen} exact />
           <Route path='/admin/userslist' component={UsersListScreen} exact />
           <Route path='/admin/offreslist' component={OffresAdminScreen} exact />
+          <Route
+            path='/candidatures'
+            component={CandidaturesUserScreen}
+            exact
+          />
           <Route
             path='/recruteur/offres'
             component={OffresRecruteurScreen}
