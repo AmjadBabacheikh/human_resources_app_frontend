@@ -23,7 +23,7 @@ const ProfileUserScreen = ({ history }) => {
       setLastName(userInfo.user.lastName);
       setEmail(userInfo.user.email);
     } else {
-      history.push('/');
+      history.push('/signin');
     }
   }, [userInfo, history]);
   const submitHandler = (e) => {

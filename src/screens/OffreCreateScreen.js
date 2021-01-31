@@ -14,8 +14,10 @@ const OffreCreateScreen = ({ history }) => {
   const [description, setDescription] = useState('');
   const [motCle, setMotCle] = useState('');
   const [arrayMotsCles, setArrayMotsCles] = useState([]);
-  const [question, setQuestion] = useState('');
-  const [arrayQuestions, setArrayQuestions] = useState([]);
+  const [arrayQuestions, setArrayQuestions] = useState([
+    'Lien de votre profil Linkedin ?',
+    'Corps de votre candidature',
+  ]);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const offreCreate = useSelector((state) => state.offreCreate);
@@ -82,10 +84,10 @@ const OffreCreateScreen = ({ history }) => {
         <Row>
           <Col xs={10} md={10} lg={11}>
             <Form.Group controlId='motCle'>
-              <Form.Label>Mots Cles</Form.Label>
+              <Form.Label>Competences Exigees</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='entrer mots cles'
+                placeholder='entrer les competences exigees'
                 value={motCle}
                 onChange={(e) => {
                   setMotCle(e.target.value);
@@ -114,7 +116,7 @@ const OffreCreateScreen = ({ history }) => {
         </Row>
         {arrayMotsCles.length > 0 ? (
           <div>
-            <h5>mots choisis</h5>
+            <h5>skills choisis</h5>
             <ListGroup>
               {arrayMotsCles.map((mot, index) => (
                 <ListGroup.Item key={index}>
@@ -144,7 +146,7 @@ const OffreCreateScreen = ({ history }) => {
         ) : (
           <p>Aucun mot cle choisi</p>
         )}
-        <Row>
+        {/* <Row>
           <Col xs={10} md={10} lg={11}>
             <Form.Group controlId='question'>
               <Form.Label style={{ marginTop: '10px' }}>
@@ -178,8 +180,8 @@ const OffreCreateScreen = ({ history }) => {
               <i className='fas fa-plus'></i>
             </Button>
           </Col>
-        </Row>
-        {arrayQuestions.length > 0 ? (
+        </Row> */}
+        {/* {arrayQuestions.length > 0 ? (
           <div>
             <h5>Questions choisis</h5>
             <ListGroup>
@@ -210,7 +212,7 @@ const OffreCreateScreen = ({ history }) => {
           </div>
         ) : (
           <p>Aucun mot cle choisi</p>
-        )}
+        )} */}
         <div>
           <Button variant='primary' type='submit' className=' my-3 px-4' block>
             Creer offre

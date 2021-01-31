@@ -101,10 +101,11 @@ export const validerOffer = (id) => async (dispatch, getState) => {
     } = getState();
     const config = {
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `${userInfo.jwt}`,
       },
     };
-    const { data } = await axios.put(`/api/ADMIN/offers/${id}/status`, config);
+    await axios.put(`/api/ADMIN/offers/${id}/status`, null, config);
     dispatch({ type: OFFRE_VALIDATE_SUCCESS });
   } catch (error) {
     dispatch({
