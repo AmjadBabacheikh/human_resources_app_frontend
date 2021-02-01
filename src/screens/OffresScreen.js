@@ -7,7 +7,7 @@ import Message from '../components/Message';
 import Offre from '../components/Offre';
 import gc from '../images/gc.jpg';
 
-const OffresScreen = () => {
+const OffresScreen = ({ history }) => {
   const dispatch = useDispatch();
   const listOffres = useSelector((state) => state.listOffres);
   const { Loading, offres, error } = listOffres;
@@ -33,7 +33,13 @@ const OffresScreen = () => {
             </h3>
             <ListGroup variant='flush'>
               {offres.map((offre) => (
-                <ListGroup.Item key={offre.id}>
+                <ListGroup.Item
+                  key={offre.id}
+                  onClick={() => {
+                    history.push(`/offers/${offre.id}`);
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
                   <Row>
                     <Col md={2} lg={6} xl={3}>
                       <Image src={gc} style={{ width: '5rem' }} />

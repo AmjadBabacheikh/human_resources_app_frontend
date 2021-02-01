@@ -21,6 +21,9 @@ import {
   OFFRE_DETAIL_REQUEST,
   OFFRE_DETAIL_SUCCESS,
   OFFRE_DETAIL_FAIL,
+  LATEST_OFFERS_REQUEST,
+  LATEST_OFFERS_SUCCESS,
+  LATEST_OFFERS_FAIL,
 } from '../contants/offresContants';
 
 export const listOffresReducer = (state = { offres: [] }, action) => {
@@ -117,6 +120,20 @@ export const detailOffreReducer = (state = { offre: {} }, action) => {
     case OFFRE_DETAIL_SUCCESS:
       return { Loading: false, offre: payload };
     case OFFRE_DETAIL_FAIL:
+      return { Loading: false, error: payload };
+    default:
+      return state;
+  }
+};
+
+export const latestOffresListReducer = (state = { offres: [] }, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case LATEST_OFFERS_REQUEST:
+      return { Loading: true };
+    case LATEST_OFFERS_SUCCESS:
+      return { Loading: false, offres: payload };
+    case LATEST_OFFERS_FAIL:
       return { Loading: false, error: payload };
     default:
       return state;

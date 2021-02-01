@@ -21,6 +21,9 @@ import {
   OFFRE_DETAIL_REQUEST,
   OFFRE_DETAIL_SUCCESS,
   OFFRE_DETAIL_FAIL,
+  LATEST_OFFERS_REQUEST,
+  LATEST_OFFERS_SUCCESS,
+  LATEST_OFFERS_FAIL,
 } from '../contants/offresContants';
 
 export const getOffres = () => async (dispatch) => {
@@ -175,6 +178,22 @@ export const getOffreDetail = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: OFFRE_DETAIL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getLatestOffres = () => async (dispatch) => {
+  try {
+    dispatch({ type: LATEST_OFFERS_REQUEST });
+    const { data } = await axios.get('/api/lastoffers');
+    dispatch({ type: LATEST_OFFERS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: LATEST_OFFERS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

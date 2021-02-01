@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Container, Col, Row, Image, Button } from 'react-bootstrap';
+import OfferCarousel from '../components/OfferCarousel';
 import { Spring } from 'react-spring/renderprops';
 import homeImage from '../homeImage.jpg';
 import './HomeScreen.css';
@@ -62,6 +63,14 @@ const HomeScreen = ({ history }) => {
             <Button className='p-3 btn-apply' onClick={handlePostuler}>
               Postuler maintenant
             </Button>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <div className='py-3'>
+            <h3 className='py-2'>Nos recentes offres</h3>
+            <OfferCarousel />
           </div>
         </Col>
       </Row>

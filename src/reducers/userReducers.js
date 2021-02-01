@@ -26,6 +26,10 @@ import {
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_RESET,
   USER_REGISTER_RESET,
+  USER_PROFILE_REQUEST,
+  USER_PROFILE_SUCCESS,
+  USER_PROFILE_FAIL,
+  USER_PROFILE_RESET,
 } from '../contants/userConstants';
 
 export const loginReducer = (state = {}, action) => {
@@ -152,6 +156,22 @@ export const profileUpdateReducer = (state = {}, action) => {
       return { Loading: false, error: payload };
     case USER_UPDATE_PROFILE_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const userProfileReducer = (state = { user: {} }, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case USER_PROFILE_REQUEST:
+      return { Loading: true };
+    case USER_PROFILE_SUCCESS:
+      return { Loading: false, user: payload };
+    case USER_PROFILE_FAIL:
+      return { Loading: false, error: payload };
+    case USER_PROFILE_RESET:
+      return { user: {} };
     default:
       return state;
   }

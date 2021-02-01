@@ -18,6 +18,11 @@
   height: 20rem;
   width: 39.9rem;
 }
+.titleOffer {
+  font-size: 26px;
+  color: #121212;
+  height: 3rem;
+}
 @media (max-width: 768px) {
   .card {
     max-width: 100%;
@@ -29,5 +34,8 @@
   }
   .img {
     width: 100%;
+  }
+  .titleOffer {
+    font-size: 20px;
   }
 }

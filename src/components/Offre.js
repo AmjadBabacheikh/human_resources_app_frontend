@@ -10,14 +10,7 @@ const Offre = ({ offre, history }) => {
     <Card className='my-3 rounded mx-sm-auto text-center card'>
       <Card.Img src={gc} variant='top' className='img' />
       <Card.Body>
-        <Card.Title
-          as='h4'
-          style={{
-            fontSize: '25px',
-            color: '#121212',
-            height: '3rem',
-          }}
-        >
+        <Card.Title as='h4' className='titleOffer'>
           {offre.title}
         </Card.Title>
         <Card.Text>{offre.description}</Card.Text>

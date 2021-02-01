@@ -9,6 +9,7 @@ import {
   listOffresRecruteurReducer,
   offreCreateReducer,
   detailOffreReducer,
+  latestOffresListReducer,
 } from './reducers/offresReducers';
 import {
   loginReducer,
@@ -18,6 +19,7 @@ import {
   userChangeRoleReducer,
   userInfosReducer,
   profileUpdateReducer,
+  userProfileReducer,
 } from './reducers/userReducers';
 import {
   offrePostulerReducer,
@@ -46,6 +48,8 @@ const reducer = combineReducers({
   offrePostuler: offrePostulerReducer,
   candidatCandidatures: candidatCandidaturesReducer,
   candidatureCancel: candidatureCancelReducer,
+  userProfile: userProfileReducer,
+  latestOffresList: latestOffresListReducer,
 });
 const initialState = {
   userLogin: {

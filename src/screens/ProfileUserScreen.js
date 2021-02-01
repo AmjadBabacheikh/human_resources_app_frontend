@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Col, Row, Button } from 'react-bootstrap';
-import { updateProfile } from '../actions/userActions';
+import { updateProfile, getMyProfile } from '../actions/userActions';
 import Message from '../components/Loader';
 import Loader from '../components/Loader';
 
@@ -15,33 +15,42 @@ const ProfileUserScreen = ({ history }) => {
   const [message, setMessage] = useState(null);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  const userProfile = useSelector((state) => state.userProfile);
+  const { Loading: LoadingProfile, user, error: errorProfile } = userProfile;
   const profileUpdate = useSelector((state) => state.profileUpdate);
   const { Loading, success, error } = profileUpdate;
-  useEffect(() => {
-    if (userInfo) {
-      setFirstName(userInfo.user.firstName);
-      setLastName(userInfo.user.lastName);
-      setEmail(userInfo.user.email);
-    } else {
-      history.push('/signin');
+
+  const isEmpty = function (obj) {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) return false;
     }
-  }, [userInfo, history]);
+    return true;
+  };
+  useEffect(() => {
+    if (isEmpty(user)) {
+      dispatch(getMyProfile());
+    } else {
+      setFirstName(user.firstName);
+      setLastName(user.lastName);
+      setEmail(user.email);
+    }
+  }, [dispatch, user, history]);
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setMessage('passwords does not match');
-    } else {
-      dispatch(
-        updateProfile({
-          firstName,
-          lastName,
-          email,
-          password,
-        })
-      );
-      setPassword('');
-      setConfirmPassword('');
-    }
+    // if (password !== confirmPassword) {
+    //   setMessage('passwords does not match');
+    // } else {
+    //   dispatch(
+    //     updateProfile({
+    //       firstName,
+    //       lastName,
+    //       email,
+    //       password,
+    //     })
+    //   );
+    //   setPassword('');
+    //   setConfirmPassword('');
+    // }
   };
   return (
     <Row>
