@@ -27,6 +27,9 @@ import {
   USER_PROFILE_SUCCESS,
   USER_PROFILE_FAIL,
   USER_PROFILE_RESET,
+  GET_USER_IMAGE_REQUEST,
+  GET_USER_IMAGE_SUCCESS,
+  GET_USER_IMAGE_FAIL,
 } from '../contants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -263,6 +266,37 @@ export const getMyProfile = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_PROFILE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getMyImage = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: GET_USER_IMAGE_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        Authorization: `${userInfo.jwt}`,
+      },
+      responseType: 'arraybuffer',
+    };
+    const response = await axios.get(`/api/CANDIDAT/pdp`, config);
+    let blob = new Blob([response.data], {
+      type: response.headers['content-type'],
+    });
+    let image = URL.createObjectURL(blob);
+    dispatch({ type: GET_USER_IMAGE_SUCCESS, payload: image });
+  } catch (error) {
+    dispatch({
+      type: GET_USER_IMAGE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

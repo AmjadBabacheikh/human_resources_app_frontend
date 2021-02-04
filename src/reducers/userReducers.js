@@ -30,6 +30,10 @@ import {
   USER_PROFILE_SUCCESS,
   USER_PROFILE_FAIL,
   USER_PROFILE_RESET,
+  GET_USER_IMAGE_REQUEST,
+  GET_USER_IMAGE_SUCCESS,
+  GET_USER_IMAGE_FAIL,
+  GET_USER_IMAGE_RESET,
 } from '../contants/userConstants';
 
 export const loginReducer = (state = {}, action) => {
@@ -172,6 +176,22 @@ export const userProfileReducer = (state = { user: {} }, action) => {
       return { Loading: false, error: payload };
     case USER_PROFILE_RESET:
       return { user: {} };
+    default:
+      return state;
+  }
+};
+
+export const userImageReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case GET_USER_IMAGE_REQUEST:
+      return { Loading: true };
+    case GET_USER_IMAGE_SUCCESS:
+      return { Loading: false, image: payload };
+    case GET_USER_IMAGE_FAIL:
+      return { Loading: false, error: payload };
+    case GET_USER_IMAGE_RESET:
+      return { image: {} };
     default:
       return state;
   }

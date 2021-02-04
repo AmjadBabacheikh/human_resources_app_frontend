@@ -43,6 +43,12 @@ const CandidaturesUserScreen = ({ history }) => {
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
+      ) : candidatures.length === 0 ? (
+        <Row>
+          <Col md={6} className='my-2'>
+            <Message>Oups,vous n avez pas de candidatures.</Message>
+          </Col>
+        </Row>
       ) : (
         <Table striped bordered hover className='sm' responsive>
           <thead>
