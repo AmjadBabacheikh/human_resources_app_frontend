@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Col, Row, Button, ListGroup } from 'react-bootstrap';
 import { getMyProfile, getMyImage, getMyCV } from '../actions/userActions';
 import { LinkContainer } from 'react-router-bootstrap';
+import { SizeMe } from 'react-sizeme';
 import Message from '../components/Loader';
 import Loader from '../components/Loader';
 import unknown from '../unknown.jpg';
@@ -11,7 +14,10 @@ import axios from 'axios';
 
 const ProfileUserScreen = ({ history }) => {
   const dispatch = useDispatch();
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadingCV, setUploadingCV] = useState(false);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const userProfile = useSelector((state) => state.userProfile);
@@ -33,6 +39,9 @@ const ProfileUserScreen = ({ history }) => {
       dispatch(getMyCV());
     }
   }, [dispatch, history]);
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
+  };
   const uploadImageHandler = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
@@ -54,6 +63,27 @@ const ProfileUserScreen = ({ history }) => {
       setUploadingImage(false);
     }
   };
+  const uploadCVHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    setUploadingCV(true);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `${userInfo.jwt}`,
+        },
+      };
+      await axios.post('/api/CANDIDAT/cv', formData, config);
+      setUploadingCV(false);
+      dispatch(getMyCV());
+    } catch (error) {
+      console.error(error);
+      setUploadingCV(false);
+    }
+  };
   return (
     <>
       <LinkContainer to='/' style={{ float: 'right' }}>
@@ -70,7 +100,7 @@ const ProfileUserScreen = ({ history }) => {
               <>
                 <img
                   alt={user.firstName}
-                  style={{ width: '80%', height: '80%' }}
+                  style={{ width: '80%', height: cv ? '20%' : '80%' }}
                   src={image}
                 />
                 <div className='file btn btn-lg btn-primary'>
@@ -87,7 +117,7 @@ const ProfileUserScreen = ({ history }) => {
               <>
                 <img
                   alt={user.firstName}
-                  style={{ width: '80%', height: '80%' }}
+                  style={{ width: '80%', height: cv ? '20%' : '70%' }}
                   src={unknown}
                 />
                 <div className='file btn btn-lg btn-primary'>
@@ -160,6 +190,36 @@ const ProfileUserScreen = ({ history }) => {
                 </Row>
               </ListGroup.Item>
             </ListGroup>
+            {cv ? (
+              <SizeMe
+                monitorHeight
+                refreshRate={128}
+                refreshMode={'debounce'}
+                render={({ size }) => (
+                  <div className='profile-cv'>
+                    <Document file={cv} onLoadSuccess={onDocumentLoadSuccess}>
+                      <Page
+                        pageNumber={pageNumber}
+                        width={size.width}
+                        size='A4'
+                      />
+                    </Document>
+                    <div className='file btn btn-lg btn-primary'>
+                      Change CV
+                      <input type='file' name='cv' onChange={uploadCVHandler} />
+                      {uploadingCV && <Loader />}
+                    </div>
+                  </div>
+                )}
+              />
+            ) : (
+              <div className='profile-cv'>
+                <div className='file btn btn-lg btn-primary'>
+                  Entrer CV
+                  <input type='file' name='cv' onChange={uploadCVHandler} />
+                </div>
+              </div>
+            )}
           </Col>
         </Row>
       )}
