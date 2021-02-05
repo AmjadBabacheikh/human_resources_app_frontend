@@ -30,6 +30,9 @@ import {
   GET_USER_IMAGE_REQUEST,
   GET_USER_IMAGE_SUCCESS,
   GET_USER_IMAGE_FAIL,
+  GET_USER_CV_REQUEST,
+  GET_USER_CV_SUCCESS,
+  GET_USER_CV_FAIL,
 } from '../contants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -297,6 +300,37 @@ export const getMyImage = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: GET_USER_IMAGE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getMyCV = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: GET_USER_CV_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        Authorization: `${userInfo.jwt}`,
+      },
+      responseType: 'arraybuffer',
+    };
+    const response = await axios.get(`/api/CANDIDAT/cv`, config);
+    let blob = new Blob([response.data], {
+      type: response.headers['content-type'],
+    });
+    let cv = URL.createObjectURL(blob);
+    dispatch({ type: GET_USER_CV_SUCCESS, payload: cv });
+  } catch (error) {
+    dispatch({
+      type: GET_USER_CV_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

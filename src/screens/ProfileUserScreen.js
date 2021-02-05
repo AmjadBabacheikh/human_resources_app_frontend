@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Col, Row, Button, ListGroup } from 'react-bootstrap';
-import { getMyProfile, getMyImage } from '../actions/userActions';
+import { getMyProfile, getMyImage, getMyCV } from '../actions/userActions';
 import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../components/Loader';
 import Loader from '../components/Loader';
+import unknown from '../unknown.jpg';
 import './ProfileUserScreen.css';
+import axios from 'axios';
 
 const ProfileUserScreen = ({ history }) => {
   const dispatch = useDispatch();
+  const [uploadingImage, setUploadingImage] = useState(false);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const userProfile = useSelector((state) => state.userProfile);
   const { Loading: LoadingProfile, user, error: errorProfile } = userProfile;
   const userImage = useSelector((state) => state.userImage);
   const { Loading: LoadingImage, image, error: errorImage } = userImage;
+  const userCv = useSelector((state) => state.userCv);
+  const { Loading: LoadingCV, cv, error: errorCV } = userCv;
   const isEmpty = function (obj) {
     for (var key in obj) {
       if (obj.hasOwnProperty(key)) return false;
@@ -25,8 +30,30 @@ const ProfileUserScreen = ({ history }) => {
     if (isEmpty(user)) {
       dispatch(getMyProfile());
       dispatch(getMyImage());
+      dispatch(getMyCV());
     }
   }, [dispatch, history]);
+  const uploadImageHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    setUploadingImage(true);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `${userInfo.jwt}`,
+        },
+      };
+      await axios.post('/api/CANDIDAT/pdp', formData, config);
+      setUploadingImage(false);
+      dispatch(getMyImage());
+    } catch (error) {
+      console.error(error);
+      setUploadingImage(false);
+    }
+  };
   return (
     <>
       <LinkContainer to='/' style={{ float: 'right' }}>
@@ -38,12 +65,42 @@ const ProfileUserScreen = ({ history }) => {
         <Loader />
       ) : (
         <Row>
-          <Col md={3} xs={12} className='my-3'>
-            <img
-              alt={user.firstName}
-              style={{ width: '80%', height: '100%' }}
-              src={image}
-            />
+          <Col md={3} xs={12} className='my-3 profile-img'>
+            {image ? (
+              <>
+                <img
+                  alt={user.firstName}
+                  style={{ width: '80%', height: '80%' }}
+                  src={image}
+                />
+                <div className='file btn btn-lg btn-primary'>
+                  Change Photo
+                  <input
+                    type='file'
+                    name='file'
+                    onChange={uploadImageHandler}
+                  />
+                  {uploadingImage && <Loader />}
+                </div>
+              </>
+            ) : (
+              <>
+                <img
+                  alt={user.firstName}
+                  style={{ width: '80%', height: '80%' }}
+                  src={unknown}
+                />
+                <div className='file btn btn-lg btn-primary'>
+                  Change Photo
+                  <input
+                    type='file'
+                    name='file'
+                    onChange={uploadImageHandler}
+                  />
+                  {uploadingImage && <Loader />}
+                </div>
+              </>
+            )}
           </Col>
           <Col md={9} xs={12} className='my-3'>
             <h4 style={{ marginBottom: '20px', color: '#333' }}>

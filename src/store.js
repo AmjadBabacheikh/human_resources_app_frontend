@@ -21,6 +21,7 @@ import {
   profileUpdateReducer,
   userProfileReducer,
   userImageReducer,
+  userCvReducer,
 } from './reducers/userReducers';
 import {
   offrePostulerReducer,
@@ -52,6 +53,7 @@ const reducer = combineReducers({
   userProfile: userProfileReducer,
   latestOffresList: latestOffresListReducer,
   userImage: userImageReducer,
+  userCv: userCvReducer,
 });
 const initialState = {
   userLogin: {

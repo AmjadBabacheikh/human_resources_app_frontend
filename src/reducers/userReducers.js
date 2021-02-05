@@ -34,6 +34,9 @@ import {
   GET_USER_IMAGE_SUCCESS,
   GET_USER_IMAGE_FAIL,
   GET_USER_IMAGE_RESET,
+  GET_USER_CV_REQUEST,
+  GET_USER_CV_SUCCESS,
+  GET_USER_CV_FAIL,
 } from '../contants/userConstants';
 
 export const loginReducer = (state = {}, action) => {
@@ -192,6 +195,20 @@ export const userImageReducer = (state = {}, action) => {
       return { Loading: false, error: payload };
     case GET_USER_IMAGE_RESET:
       return { image: {} };
+    default:
+      return state;
+  }
+};
+
+export const userCvReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case GET_USER_CV_REQUEST:
+      return { Loading: true };
+    case GET_USER_CV_SUCCESS:
+      return { Loading: false, cv: payload };
+    case GET_USER_CV_FAIL:
+      return { Loading: false, error: payload };
     default:
       return state;
   }
