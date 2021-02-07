@@ -86,7 +86,7 @@ const ProfileUserScreen = ({ history }) => {
   };
   return (
     <>
-      <LinkContainer to='/' style={{ float: 'right' }}>
+      <LinkContainer to='/editProfile' style={{ float: 'right' }}>
         <Button variant='secondary' className='my-3'>
           Edit Profile
         </Button>
@@ -217,6 +217,7 @@ const ProfileUserScreen = ({ history }) => {
                 <div className='file btn btn-lg btn-primary'>
                   Entrer CV
                   <input type='file' name='cv' onChange={uploadCVHandler} />
+                  {uploadingCV && <Loader />}
                 </div>
               </div>
             )}

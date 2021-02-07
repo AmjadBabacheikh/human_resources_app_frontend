@@ -223,7 +223,13 @@ export const changeRoleUser = (id, role) => async (dispatch, getState) => {
   }
 };
 
-export const updateProfile = (user) => async (dispatch, getState) => {
+export const updateProfile = (
+  firstName,
+  lastName,
+  adress,
+  phoneNumber,
+  password
+) => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_UPDATE_PROFILE_REQUEST,
@@ -237,7 +243,11 @@ export const updateProfile = (user) => async (dispatch, getState) => {
         Authorization: `${userInfo.jwt}`,
       },
     };
-    const { data } = await axios.put(`api/CANDIDAT`, { user }, config);
+    const { data } = await axios.put(
+      `/api/CANDIDAT`,
+      { firstName, lastName, adress, phoneNumber, password },
+      config
+    );
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

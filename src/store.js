@@ -27,6 +27,11 @@ import {
   offrePostulerReducer,
   candidatCandidaturesReducer,
   candidatureCancelReducer,
+  candidaturesOfferReducer,
+  detailCandidatureReducer,
+  candidatureOwnerCvReducer,
+  candidatureOwnerPdpReducer,
+  changeStatusCandidatureReducer,
 } from './reducers/candidaturesReducers';
 
 const userLoginFromStorage = localStorage.getItem('userInfo')
@@ -54,6 +59,11 @@ const reducer = combineReducers({
   latestOffresList: latestOffresListReducer,
   userImage: userImageReducer,
   userCv: userCvReducer,
+  candidaturesOffer: candidaturesOfferReducer,
+  detailCandidature: detailCandidatureReducer,
+  candidatureOwnerCv: candidatureOwnerCvReducer,
+  candidatureOwnerPdp: candidatureOwnerPdpReducer,
+  changeStatusCandidature: changeStatusCandidatureReducer,
 });
 const initialState = {
   userLogin: {

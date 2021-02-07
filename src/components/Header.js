@@ -34,9 +34,6 @@ const Header = ({ history }) => {
               </LinkContainer>
               {userInfo && userInfo.user.role === 'RECRUTEUR' ? (
                 <NavDropdown title='Recruteur' id='Rectruteur'>
-                  <LinkContainer to='/recruteur/candidatures'>
-                    <NavDropdown.Item>candidatures</NavDropdown.Item>
-                  </LinkContainer>
                   <LinkContainer to='/recruteur/offres'>
                     <NavDropdown.Item>offres</NavDropdown.Item>
                   </LinkContainer>

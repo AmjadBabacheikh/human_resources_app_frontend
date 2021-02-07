@@ -65,7 +65,7 @@ const CandidaturesUserScreen = ({ history }) => {
               <tr key={candidature.code}>
                 <td>{index + 1}</td>
                 <td>
-                  {candidature.postedAt.slice(0, 10)}{' '}
+                  {candidature.postedAt.slice(0, 10)}
                   {candidature.postedAt.slice(11, 19)}
                 </td>
                 <td>{candidature.theOffer.title}</td>

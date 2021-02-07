@@ -53,6 +53,7 @@ const OffresRecruteurScreen = ({ history }) => {
               <th>DESCRIPTION</th>
               <th>STATUS</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -69,24 +70,25 @@ const OffresRecruteurScreen = ({ history }) => {
                   )}
                 </td>
                 <td>
-                  {/* <LinkContainer to={`/admin/recruteur/${offre.id}/edit`}>
+                  <LinkContainer to={`/candidatures/offer/${offre.id}`}>
                     <Button
-                      variant='light'
+                      variant='primary'
                       className='btn-sm'
                       style={{ marginLeft: '5px' }}
                     >
-                      <i className='fas fa-edit'></i>
+                      Candidatures
                     </Button>
-                  </LinkContainer> */}
+                  </LinkContainer>
+                </td>
+                <td>
                   <Button
                     variant='danger'
                     className='btn-sm'
                     onClick={() => {
                       console.log('hello');
                     }}
-                    style={{ marginTop: '5px' }}
                   >
-                    <i className='far fa-times-circle'></i>
+                    Cloturer
                   </Button>
                 </td>
               </tr>

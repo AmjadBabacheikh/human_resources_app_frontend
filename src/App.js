@@ -17,6 +17,9 @@ import OffresRecruteurScreen from './screens/OffresRecruteurScreen';
 import OffreCreateScreen from './screens/OffreCreateScreen';
 import OffreDetailScreen from './screens/OffreDetailScreen';
 import CandidaturesUserScreen from './screens/CandidaturesUserScreen';
+import UpdateProfileUserScreen from './screens/UpdateProfileUserScreen';
+import CandidaturesOfferScreen from './screens/CandidaturesOfferScreen';
+import CandidatureDetailScreen from './screens/CandidatureDetailScreen';
 const App = () => {
   return (
     <Router>
@@ -30,11 +33,26 @@ const App = () => {
           <Route path='/register' component={SignUpScreen} exact />
           <Route path='/about' component={AboutScreen} exact />
           <Route path='/profile' component={ProfileUserScreen} exact />
+          <Route
+            path='/editProfile'
+            component={UpdateProfileUserScreen}
+            exact
+          />
           <Route path='/admin/userslist' component={UsersListScreen} exact />
           <Route path='/admin/offreslist' component={OffresAdminScreen} exact />
           <Route
             path='/candidatures'
             component={CandidaturesUserScreen}
+            exact
+          />
+          <Route
+            path='/offer/:offerId/candidatures/:candidatureId'
+            component={CandidatureDetailScreen}
+            exact
+          />
+          <Route
+            path='/candidatures/offer/:id'
+            component={CandidaturesOfferScreen}
             exact
           />
           <Route
