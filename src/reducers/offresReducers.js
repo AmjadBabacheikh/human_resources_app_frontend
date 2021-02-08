@@ -24,6 +24,10 @@ import {
   LATEST_OFFERS_REQUEST,
   LATEST_OFFERS_SUCCESS,
   LATEST_OFFERS_FAIL,
+  CLOTURER_OFFRE_REQUEST,
+  CLOTURER_OFFRE_SUCCESS,
+  CLOTURER_OFFRE_FAIL,
+  CLOTURER_OFFRE_REST,
 } from '../contants/offresContants';
 
 export const listOffresReducer = (state = { offres: [] }, action) => {
@@ -135,6 +139,22 @@ export const latestOffresListReducer = (state = { offres: [] }, action) => {
       return { Loading: false, offres: payload };
     case LATEST_OFFERS_FAIL:
       return { Loading: false, error: payload };
+    default:
+      return state;
+  }
+};
+
+export const offreCloturerReducer = (state = {}, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case CLOTURER_OFFRE_REQUEST:
+      return { Loading: true };
+    case CLOTURER_OFFRE_SUCCESS:
+      return { Loading: false, successCloturer: true };
+    case CLOTURER_OFFRE_FAIL:
+      return { Loading: false, errorCloturer: payload };
+    case CLOTURER_OFFRE_REST:
+      return {};
     default:
       return state;
   }

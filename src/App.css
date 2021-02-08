@@ -3,12 +3,13 @@ html {
   margin: 0px;
   box-sizing: content-box;
 }
-main {
+.main-dark {
   min-height: 92vh;
-}
-body {
   background-color: #ffffff;
 }
+/* body {
+  background-color: #ffffff;
+} */
 @media (max-width: 900px) {
   .homeContent {
     display: block;

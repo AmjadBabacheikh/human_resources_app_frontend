@@ -10,6 +10,7 @@ import {
   offreCreateReducer,
   detailOffreReducer,
   latestOffresListReducer,
+  offreCloturerReducer,
 } from './reducers/offresReducers';
 import {
   loginReducer,
@@ -64,6 +65,7 @@ const reducer = combineReducers({
   candidatureOwnerCv: candidatureOwnerCvReducer,
   candidatureOwnerPdp: candidatureOwnerPdpReducer,
   changeStatusCandidature: changeStatusCandidatureReducer,
+  offreCloturer: offreCloturerReducer,
 });
 const initialState = {
   userLogin: {

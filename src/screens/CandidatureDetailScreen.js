@@ -161,7 +161,9 @@ const CandidatureDetailScreen = ({ match, history }) => {
             {LoadingCV ? (
               <Loader />
             ) : errorCV ? (
-              <h5>Candidat ne possedant pas de cv</h5>
+              <h5 style={{ textAlign: 'center', margin: '4rem' }}>
+                Candidat ne possedant pas de cv
+              </h5>
             ) : (
               <SizeMe
                 monitorHeight

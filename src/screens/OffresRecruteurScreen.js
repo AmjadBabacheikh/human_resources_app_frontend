@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Row, Col, Container, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { getOffresRecruteur } from '../actions/offresActions';
+import { getOffresRecruteur, cloturerOffre } from '../actions/offresActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
@@ -12,13 +12,19 @@ const OffresRecruteurScreen = ({ history }) => {
   const { userInfo } = userLogin;
   const listOffresRecruteur = useSelector((state) => state.listOffresRecruteur);
   const { Loading, offres, error } = listOffresRecruteur;
+  const offreCloturer = useSelector((state) => state.offreCloturer);
+  const {
+    Loading: LoadingCloturer,
+    successCloturer,
+    errorCloturer,
+  } = offreCloturer;
   useEffect(() => {
     if (userInfo && userInfo.user.role === 'RECRUTEUR') {
       dispatch(getOffresRecruteur());
     } else {
       history.push('/signin');
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo, successCloturer]);
 
   return (
     <>
@@ -85,7 +91,7 @@ const OffresRecruteurScreen = ({ history }) => {
                     variant='danger'
                     className='btn-sm'
                     onClick={() => {
-                      console.log('hello');
+                      dispatch(cloturerOffre(offre.id));
                     }}
                   >
                     Cloturer

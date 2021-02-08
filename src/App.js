@@ -24,7 +24,7 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <main>
+      <main className='main-dark'>
         <Container>
           <Route path='/' component={HomeScreen} exact />
           <Route path='/offres' component={OffresScreen} exact />

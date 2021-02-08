@@ -24,6 +24,9 @@ import {
   LATEST_OFFERS_REQUEST,
   LATEST_OFFERS_SUCCESS,
   LATEST_OFFERS_FAIL,
+  CLOTURER_OFFRE_REQUEST,
+  CLOTURER_OFFRE_SUCCESS,
+  CLOTURER_OFFRE_FAIL,
 } from '../contants/offresContants';
 
 export const getOffres = () => async (dispatch) => {
@@ -194,6 +197,31 @@ export const getLatestOffres = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LATEST_OFFERS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const cloturerOffre = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: CLOTURER_OFFRE_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${userInfo.jwt}`,
+      },
+    };
+    await axios.put(`/api/RECRUTEUR/offers/${id}/status`, [], config);
+    dispatch({ type: CLOTURER_OFFRE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: CLOTURER_OFFRE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
