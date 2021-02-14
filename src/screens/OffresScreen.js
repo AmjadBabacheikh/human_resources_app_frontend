@@ -18,6 +18,8 @@ const OffresScreen = ({ history }) => {
     <>
       {Loading ? (
         <Loader />
+      ) : error ? (
+        <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
           <Col>

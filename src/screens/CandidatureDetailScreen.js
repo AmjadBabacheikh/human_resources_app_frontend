@@ -71,7 +71,6 @@ const CandidatureDetailScreen = ({ match, history }) => {
             >
               <i className='fas fa-arrow-alt-circle-left'></i>
             </Button>
-
             <ListGroup variant='flush'>
               <ListGroup.Item>
                 <Row>

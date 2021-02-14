@@ -244,7 +244,7 @@ export const updateProfile = (
       },
     };
     const { data } = await axios.put(
-      `/api/CANDIDAT`,
+      `/api/CANDIDAT/`,
       { firstName, lastName, adress, phoneNumber, password },
       config
     );

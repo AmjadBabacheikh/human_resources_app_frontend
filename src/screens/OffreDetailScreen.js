@@ -122,52 +122,60 @@ const OffreDetailScreen = ({ match, history }) => {
               </Row>
               <Row>
                 <Container>
-                  <Row className='justify-content-md'>
-                    <Col xs={12} md={8} className='px-0'>
-                      <Form onSubmit={handleSubmit}>
-                        <h4>Postuler sur : </h4>
-                        {message && (
-                          <Message variant='danger'>{message}</Message>
-                        )}
-                        {LoadingPostuler && <Loader />}
-                        {errorPostuler && (
-                          <Message variant='danger'>{errorPostuler}</Message>
-                        )}
-                        <Form.Group controlId='linkden'>
-                          <Form.Label>Lien de votre profil Linkedin</Form.Label>
-                          <Form.Control
-                            type='text'
-                            placeholder=''
-                            value={linkden}
-                            onChange={(e) => {
-                              setLinkden(e.target.value);
-                            }}
-                          />
-                        </Form.Group>
-                        <Form.Group controlId='motivation'>
-                          <Form.Label>
-                            Corps de votre candidature
-                            <span style={{ color: 'red' }}> *</span>
-                          </Form.Label>
-                          <Form.Control
-                            as='textarea'
-                            rows={4}
-                            required
-                            value={motivation}
-                            onChange={(e) => setMotivation(e.target.value)}
-                          />
-                        </Form.Group>
-                        <Button
-                          variant='primary'
-                          type='submit'
-                          className='my-2 btn-sm'
-                          style={{ float: 'right' }}
-                        >
-                          Envoyer
-                        </Button>
-                      </Form>
-                    </Col>
-                  </Row>
+                  {userInfo ? (
+                    <Row className='justify-content-md'>
+                      <Col xs={12} md={8} className='px-0'>
+                        <Form onSubmit={handleSubmit}>
+                          <h4>Postuler sur : </h4>
+                          {message && (
+                            <Message variant='danger'>{message}</Message>
+                          )}
+                          {LoadingPostuler && <Loader />}
+                          {errorPostuler && (
+                            <Message variant='danger'>{errorPostuler}</Message>
+                          )}
+                          <Form.Group controlId='linkden'>
+                            <Form.Label>
+                              Lien de votre profil Linkedin
+                            </Form.Label>
+                            <Form.Control
+                              type='text'
+                              placeholder=''
+                              value={linkden}
+                              onChange={(e) => {
+                                setLinkden(e.target.value);
+                              }}
+                            />
+                          </Form.Group>
+                          <Form.Group controlId='motivation'>
+                            <Form.Label>
+                              Corps de votre candidature
+                              <span style={{ color: 'red' }}> *</span>
+                            </Form.Label>
+                            <Form.Control
+                              as='textarea'
+                              rows={4}
+                              required
+                              value={motivation}
+                              onChange={(e) => setMotivation(e.target.value)}
+                            />
+                          </Form.Group>
+                          <Button
+                            variant='primary'
+                            type='submit'
+                            className='my-2 btn-sm'
+                            style={{ float: 'right' }}
+                          >
+                            Envoyer
+                          </Button>
+                        </Form>
+                      </Col>
+                    </Row>
+                  ) : (
+                    <Message>
+                      Veuillez vous connecter afin de postuler !
+                    </Message>
+                  )}
                 </Container>
               </Row>
             </Col>
