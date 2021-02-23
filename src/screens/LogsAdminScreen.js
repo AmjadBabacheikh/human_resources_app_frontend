@@ -40,7 +40,10 @@ const LogsAdminScreen = () => {
             {logs.map((log) => (
               <tr key={log.id}>
                 <td>{log.id}</td>
-                <td>{log.date.slice(0, 10)}</td>
+                <td>
+                  {log.date.slice(0, 10)} <span> </span>
+                  {log.date.slice(11, 19)}
+                </td>
                 <td>
                   {log.user && log.user.firstName}
                   <span> </span>
