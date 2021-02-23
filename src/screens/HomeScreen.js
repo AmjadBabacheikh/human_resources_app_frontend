@@ -49,10 +49,11 @@ const HomeScreen = ({ history }) => {
         <Col>
           <div className='text-center py-4'>
             <h4 className='homeh4'>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus,
-              quam distinctio alias corporis sapiente, fuga doloremque molestiae
-              accusantium est pariatur voluptas porro! Corporis dolores in
-              explicabo labore eaque quibusdam eos.
+              Donasid recherche des personnes dynamiques, entreprenantes, de
+              futurs collaborateurs et managers qui souhaitent évoluer au sein
+              d’une entreprise aux nombreux challenges. En interne, les
+              relations de travail se basent sur la transparence, la
+              concertation et le travail d’équipe.
             </h4>
           </div>
         </Col>

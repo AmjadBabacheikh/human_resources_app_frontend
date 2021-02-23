@@ -37,6 +37,10 @@ import {
   GET_USER_CV_REQUEST,
   GET_USER_CV_SUCCESS,
   GET_USER_CV_FAIL,
+  GET_LOG_REQUEST,
+  GET_LOG_SUCCESS,
+  GET_LOG_FAIL,
+  GET_LOG_RESET,
 } from '../contants/userConstants';
 
 export const loginReducer = (state = {}, action) => {
@@ -209,6 +213,22 @@ export const userCvReducer = (state = {}, action) => {
       return { Loading: false, cv: payload };
     case GET_USER_CV_FAIL:
       return { Loading: false, error: payload };
+    default:
+      return state;
+  }
+};
+
+export const logsListReducer = (state = { logs: [] }, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case GET_LOG_REQUEST:
+      return { Loading: true };
+    case GET_LOG_SUCCESS:
+      return { Loading: false, logs: payload };
+    case GET_LOG_FAIL:
+      return { Loading: false, error: payload };
+    case GET_LOG_RESET:
+      return { logs: [] };
     default:
       return state;
   }

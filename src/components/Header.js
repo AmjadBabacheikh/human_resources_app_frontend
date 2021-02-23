@@ -47,6 +47,9 @@ const Header = ({ history }) => {
                   <LinkContainer to='/admin/offreslist'>
                     <NavDropdown.Item>offres</NavDropdown.Item>
                   </LinkContainer>
+                  <LinkContainer to='/admin/logs'>
+                    <NavDropdown.Item>logs</NavDropdown.Item>
+                  </LinkContainer>
                 </NavDropdown>
               ) : null}
               {userInfo ? (

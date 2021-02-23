@@ -33,6 +33,9 @@ import {
   GET_USER_CV_REQUEST,
   GET_USER_CV_SUCCESS,
   GET_USER_CV_FAIL,
+  GET_LOG_REQUEST,
+  GET_LOG_SUCCESS,
+  GET_LOG_FAIL,
 } from '../contants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -341,6 +344,33 @@ export const getMyCV = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: GET_USER_CV_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getLogs = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: GET_LOG_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${userInfo.jwt}`,
+      },
+    };
+    const { data } = await axios.get(`/api/ADMIN/Log`, config);
+    dispatch({ type: GET_LOG_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: GET_LOG_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

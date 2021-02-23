@@ -1,10 +1,26 @@
 .about-section {
-  padding: 50px;
-  text-align: center;
-  text-shadow: 20px;
-  background-image: url(../about.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  color: snow;
-}
+  padding: 170px;
+  
+   background-image: url(../phot.png);
+   background-repeat: no-repeat;
+   background-size: cover;   
+   background-position: center;
+   
+ }
+ 
+ .aboutContainer{
+  max-width: 100%;
+ }
+ .para{
+   line-height: 900%;
+ }
+ .teamImage{
+  
+   clip-path:ellipse(50% 50%);
+   width: 90%;
+  
+ }
+ .about-section2{
+  background-image: url(../about3.png);
+
+ }
